@@ -1,16 +1,25 @@
 package com.example.springtodoservice.service;
 
+import com.example.springtodoservice.domain.TodoVO;
 import com.example.springtodoservice.dto.TodoDTO;
+import com.example.springtodoservice.mapper.TodoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 @Log4j2
-@RequiredArgsConstructor
+@RequiredArgsConstructor //의존성 주입이 필요한 객체의 타입을 final로 고정시키고 @RequiredQrgsConstructor을 이용하여 생성자를 생성하는 방식으로 주입 받는다.
 public class TodoServiceImpl implements TodoService{
+
+    private final TodoMapper todoMapper;
+    private final ModelMapper modelMapper;
     @Override
     public void register(TodoDTO todoDTO) {
-
+        log.info(modelMapper);
+        TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
+        log.info(todoVO);
+        todoMapper.insert(todoVO);
     }
 }

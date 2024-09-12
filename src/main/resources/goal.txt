@@ -13,3 +13,8 @@
 2. Todo 기능 개발
     1) 등록작업 처리
         TodoMapper -> TodoService -> TodoController -> JSP
+    2) 테스트 코드 개발 - 테스트 코드를 작성하여 (ServiceTests) testRegister 메서드를 테스트하여 글하나(TodoDTO) 생성이 제대로 동작하는지
+        콘솔창에 확인하고 데이터베이스 tbl_todo 테이블에 글이 등록되었는지 확인하세요.
+        * 테스트 하는거 보면 지금 Mapper가 그전에 DB랑 직접 연결의 역할을 했던 DAO의 역할을 해준다고 생각하고
+        Service는 Controller랑 Mapper사이의 로직을 처리하는 것이다.
+        그렇다면 테스트는 Mapper 먼저 하고, 그 다음 Mapper를 호출하는 Service도 테스트를 진행하는 것이다.
