@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springtodoservice.mapper.TodoMapper">
+    <select id="getTime" resultType="string">
+        select now()
+    </select>
+    <insert id="insert">
+        insert into tbl_todo (title, dueDate, writer) values (#{title}, #{dueDate}, #{writer})
+    </insert>
+</mapper>
+
+        <!--select 태그는 반드시 resultType이나 resultMap이라는 속성을 지정해야 한다.-->
+        <!--select 문의 결과를 어떤 타입으로 처리할 지에 대한 설정 java.lang.String-->

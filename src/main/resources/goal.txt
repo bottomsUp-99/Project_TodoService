@@ -1,0 +1,15 @@
+목표 : 스프링, MyBatis, 스프링 MVC 모두 결합하는 구조로 구성한다. ==> 서블릿 기반 Todo 웹 서비스 구현!!
+
+서블릿 기반 Todo 웹 서비스 : CRUD 기능 개발 + 목록에 페이징 + 검색 필터링
+
+1. MyBatis 와 스프링을 이용한 영속 처리
+    1) VO 선언 - 프로젝트 domain 패키지에 TodoVo 클래스를 구현해주세요
+    2) Mapper 인터페이스 - mapper 패키지에 TodoMapper 인터페이스를 만들어주세요
+        String getTime(); 선언
+    3) XML 개발 - resources/mappers TodoMapper.xml을 선언해주세요
+        TodoMapper 인터페이스의 getTime 메서드를 동작하여 현재 시간을 조회할 수 있는 동적 쿼리를 작성해주세요.
+    4) 테스트 코드 개발 - 테스트 코드를 작성하여 (TodoMapperTests) getTime 메서드를 테스트하여 현재 시간을 콘솔창에 출력하세요.
+
+2. Todo 기능 개발
+    1) 등록작업 처리
+        TodoMapper -> TodoService -> TodoController -> JSP
