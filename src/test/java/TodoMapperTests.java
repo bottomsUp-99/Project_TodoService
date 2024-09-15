@@ -1,5 +1,9 @@
 import com.example.springtodoservice.domain.TodoVO;
+import com.example.springtodoservice.dto.PageRequestDTO;
+import com.example.springtodoservice.dto.PageResponseDTO;
+import com.example.springtodoservice.dto.TodoDTO;
 import com.example.springtodoservice.mapper.TodoMapper;
+import com.sun.tools.javac.comp.Todo;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)
@@ -26,6 +31,7 @@ public class TodoMapperTests {
     public void testGetTime(){
         log.info("현재 시간은 {}", todoMapper.getTime());
     }
+
     @Test
     public void testInsert(){
         TodoVO todoVO = TodoVO.builder()
@@ -36,4 +42,53 @@ public class TodoMapperTests {
         todoMapper.insert(todoVO);
     }
 
+    @Test
+    public void testSelectAll(){
+        List<TodoVO> voList = todoMapper.selectAll();
+        voList.forEach(System.out::println);
+    }
+
+    @Test
+    public void testSelectOne(){
+        TodoVO todoVO = todoMapper.selectOne(3L);
+        log.info(todoVO);
+    }
+
+    @Test
+    public void testDelete(){
+        todoMapper.delete(3L);
+    }
+
+    @Test
+    public void testUpdate(){
+        TodoVO todoVO = TodoVO.builder()
+                .title("update test")
+                .dueDate(LocalDate.of(2024,9,20))
+                .writer("LJH")
+                .finished(true)
+                .build();
+        todoMapper.update(todoVO);
+    }
+
+    @Test
+    public void testSelectList(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        voList.forEach(log::info);
+    }
+
+    @Test
+    public void testSelectSearch(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .types(new String []{"t","w"})
+                .keyword("스프링")
+                .build();
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        voList.forEach(log::info);
+    }
 }

@@ -23,6 +23,7 @@
         <property name="formatters">
             <set>
                 <bean class="com.example.springtodoservice.controller.formatter.LocalDateFormatter"/>
+                <bean class="com.example.springtodoservice.controller.formatter.CheckboxFormatter"/>
             </set>
         </property>
     </bean>

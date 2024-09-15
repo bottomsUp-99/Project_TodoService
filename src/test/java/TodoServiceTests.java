@@ -1,4 +1,6 @@
 import com.example.springtodoservice.domain.TodoVO;
+import com.example.springtodoservice.dto.PageRequestDTO;
+import com.example.springtodoservice.dto.PageResponseDTO;
 import com.example.springtodoservice.dto.TodoDTO;
 import com.example.springtodoservice.service.TodoService;
 import com.example.springtodoservice.service.TodoServiceImpl;
@@ -33,5 +35,14 @@ public class TodoServiceTests {
                 .build();
         todoService.register(todoDTO);
         log.info(todoDTO);
+    }
+
+    @Test
+    public void testPaging(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
+        PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
+        log.info(responseDTO);
+        
+        responseDTO.getDtoList().forEach(log::info);
     }
 }

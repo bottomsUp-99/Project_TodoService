@@ -45,18 +45,18 @@
                     <div class="card-body">
                         <h5 class="card-title">Search </h5>
                         <form action="/todo/list" method="get">
-                            <input type="hidden" name="size" value="${pageRequestDTO.size}">
+                            <input type="hidden" name="size" value="${responseDTO.size}">
                             <div class="mb-3">
-                                <input type="checkbox" name="finished" ${pageRequestDTO.finished?"checked":""} >완료여부
+                                <input type="checkbox" name="finished"} >완료여부
                             </div>
                             <div class="mb-3">
-                                <input type="checkbox" name="types" value="t" ${pageRequestDTO.checkType("t")?"checked":""}>제목
-                                <input type="checkbox" name="types" value="w"  ${pageRequestDTO.checkType("w")?"checked":""}>작성자
-                                <input type="text"  name="keyword" class="form-control" value ='<c:out value="${pageRequestDTO.keyword}"/>' >
+                                <input type="checkbox" name="types" value="t">제목
+                                <input type="checkbox" name="types" value="w">작성자
+                                <input type="text"  name="keyword" class="form-control" value ='<c:out value=""/>' >
                             </div>
                             <div class="input-group mb-3 dueDateDiv">
-                                <input type="date" name="from" class="form-control" value="${pageRequestDTO.from}">
-                                <input type="date" name="to" class="form-control"  value="${pageRequestDTO.to}">
+                                <input type="date" name="from" class="form-control" value="">
+                                <input type="date" name="to" class="form-control"  value="">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="float-end">
@@ -65,9 +65,29 @@
                                 </div>
                             </div>
                         </form>
+                        <%--                        <form action="/todo/list" method="get">--%>
+                        <%--                            <input type="hidden" name="size" value="">--%>
+                        <%--                            <div class="mb-3">--%>
+                        <%--                                <input type="checkbox" name="finished"} >완료여부--%>
+                        <%--                            </div>--%>
+                        <%--                            <div class="mb-3">--%>
+                        <%--                                <input type="checkbox" name="types" value="t"}>제목--%>
+                        <%--                                <input type="checkbox" name="types" value="w"}>작성자--%>
+                        <%--                                <input type="text"  name="keyword" class="form-control" value ='<c:out value=""/>' >--%>
+                        <%--                            </div>--%>
+                        <%--                            <div class="input-group mb-3 dueDateDiv">--%>
+                        <%--                                <input type="date" name="from" class="form-control" value="">--%>
+                        <%--                                <input type="date" name="to" class="form-control"  value="">--%>
+                        <%--                            </div>--%>
+                        <%--                            <div class="input-group mb-3">--%>
+                        <%--                                <div class="float-end">--%>
+                        <%--                                    <button class="btn btn-primary" type="submit">Search</button>--%>
+                        <%--                                    <button class="btn btn-info clearBtn" type="reset">Clear</button>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <%--                        </form>--%>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -94,8 +114,7 @@
                                 <tr>
                                     <th scope="row"><c:out value="${dto.tno}"/></th>
                                     <td>
-                                        <a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}" class="text-decoration-none" data-tno="${dto.tno}" >
-                                            <c:out value="${dto.title}"/>
+                                        <a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}" class="text-decoration-none"> <c:out value="${dto.title}"/>
                                         </a>
                                     </td>
                                     <td><c:out value="${dto.writer}"/></td>
@@ -134,49 +153,49 @@
 
                         <script>
 
-/* document.querySelector(".pagination").addEventListener("click", function (e) {
-        e.preventDefault()
-        e.stopPropagation()
+                            /* document.querySelector(".pagination").addEventListener("click", function (e) {
+                                    e.preventDefault()
+                                    e.stopPropagation()
 
-        const target = e.target
-
-
-        if(target.tagName !== 'A') {
-            return
-        }
-        const num = target.getAttribute("data-num")
-
-        self.location = `/todo/list?page=\${num}` //백틱(` `)을 이용해서 템플릿 처리
-    },false)*/
-
-    document.querySelector(".pagination").addEventListener("click", function (e) {
-        e.preventDefault()
-        e.stopPropagation()
-
-        const target = e.target
-
-        if(target.tagName !== 'A') {
-            return
-        }
-        const num = target.getAttribute("data-num")
-
-        const formObj = document.querySelector("form")
-
-        formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
-
-        formObj.submit();
-
-    },false)
+                                    const target = e.target
 
 
+                                    if(target.tagName !== 'A') {
+                                        return
+                                    }
+                                    const num = target.getAttribute("data-num")
 
-    document.querySelector(".clearBtn").addEventListener("click", function (e){
-        e.preventDefault()
-        e.stopPropagation()
+                                    self.location = `/todo/list?page=\${num}` //백틱(` `)을 이용해서 템플릿 처리
+                                },false)*/
 
-        self.location ='/todo/list'
+                            document.querySelector(".pagination").addEventListener("click", function (e) {
+                                e.preventDefault()
+                                e.stopPropagation()
 
-    },false)
+                                const target = e.target
+
+                                if(target.tagName !== 'A') {
+                                    return
+                                }
+                                const num = target.getAttribute("data-num")
+
+                                const formObj = document.querySelector("form")
+
+                                formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
+
+                                formObj.submit();
+
+                            },false)
+
+
+
+                            document.querySelector(".clearBtn").addEventListener("click", function (e){
+                                e.preventDefault()
+                                e.stopPropagation()
+
+                                self.location ='/todo/list'
+
+                            },false)
 
 
                         </script>
